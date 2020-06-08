@@ -1,0 +1,11 @@
+{
+    "name": "kitchen",
+    "jobs": {
+        "chop veggies": [1, ["prepare knife"]],
+        "boil water"  : [6, []],
+        "cook veggies": [3, ["chop veggies", "boil water"]],
+        "cook meat"   : [4, ["boil water"]],
+        "serve"       : [1, ["cook veggies", "cook meat"]]
+    },
+    "num_processors"  : 1
+}

@@ -96,8 +96,10 @@ def solveSchedule(prob, num_processors, time_limit) :
     if s.check() == sat :
         m = s.model()
         result = [ m.evaluate(symbols[i]) for i in range(n) ]
+        sched  = [ (result[i], job_list[i]['name']) for i in range(n) ]
+        sched  = sorted(sched, key=lambda x: int(str(x[0])) )
         for i in range(n) :
-            print("# %20s : %2s" % (job_list[i]['name'], result[i]))
+            print("# %2s : %20s" % (sched[i][0], sched[i][1]))
     else :
         print("UNSAT")
 

@@ -37,6 +37,7 @@
 * We have SAT solvers.
 * Translate an arbitrary JS to SAT, then solve SAT by SAT solver.
 * Explain our reduction and algorithm
+* Sample generation
 
 ## Evaluation - Test and Analysis
 * Correctness (Yes to yes instances, No to no instances)

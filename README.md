@@ -5,9 +5,9 @@ This is a job scheduler that answers whether given a set of jobs can be finished
   - [Overleaf](https://www.overleaf.com/4414353837nknwqqzgsnyk)
 
 ### Parameters
-Jobs        : any given jobs can have priority relationship
-Processors  : number of processors for handling this problem
-Time        : time limit for finishing all the jobs
+- Jobs        : any given jobs can have priority relationship
+- Processors  : number of processors for handling this problem
+- Time        : time limit for finishing all the jobs
 
 ### Usage 
 ```

@@ -85,7 +85,7 @@ def solveSchedule(prob, num_processors, time_limit) :
     priori_c = []
     for this_job_id in range(n) :
         for priori_id in job_list[this_job_id]['priori'] :
-            priori_c.append( symbols[priori_id] + job_list[priori_id]['duration'] < symbols[this_job_id] )
+            priori_c.append( symbols[priori_id] + job_list[priori_id]['duration'] <= symbols[this_job_id] )
 
 
     ## solve it !!

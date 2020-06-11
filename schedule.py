@@ -59,14 +59,11 @@ def get_job_list(prob) :
 
 def solveSchedule(prob, num_processors, time_limit) :
 
-    num_processors = 1
-
     ## get the transform the list of job
     job_list = get_job_list(prob)
-
     n = len(job_list)
-    ## the starting time for each job
 
+    ## the starting time for each job
     symbols  = [ Int("J_%03d" % i) for i in range(n) ]
 
     ## any given jobs must start between time '0' and 'time_limit-1'
@@ -76,8 +73,12 @@ def solveSchedule(prob, num_processors, time_limit) :
     end_bound_c   = [ symbols[i] + job_list[i]['duration'] <= time_limit
                                                         for i in range(n) ]
 
-    ## processors
-    processor_c = [ Distinct(symbols) ]
+    ## k processors
+    processor_c = []
+    for time_slot in range(time_limit) :
+        one_processor_one_exec      = [ ( And(symbols[i] <= time_slot, time_slot < symbols[i] + job_list[i]['duration']), 1) for i in range(n) ]
+        less_than_k_of_them_is_true = PbLe(one_processor_one_exec, num_processors)
+        processor_c.append(less_than_k_of_them_is_true)
 
     ## any given jobs must start after its priorities
     priori_c = []
@@ -93,6 +94,8 @@ def solveSchedule(prob, num_processors, time_limit) :
     print("#" * 50)
     s = Solver()
     s.add( start_bound_c + end_bound_c + processor_c + priori_c )
+
+    ## Display
     if s.check() == sat :
         m = s.model()
         result = [ m.evaluate(symbols[i]) for i in range(n) ]

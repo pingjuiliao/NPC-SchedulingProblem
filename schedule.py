@@ -2,6 +2,7 @@
 import argparse
 import json
 import sys
+import time
 from z3 import *
 
 PROBLEM_NAME = "name"
@@ -95,16 +96,30 @@ def solveSchedule(prob, num_processors, time_limit) :
     s = Solver()
     s.add( start_bound_c + end_bound_c + processor_c + priori_c )
 
+    sat_tic   = time.time()
+    sat_check = s.check()
+    sat_toc   = time.time()
+
     ## Display
-    if s.check() == sat :
+    tic = toc = None
+    if sat_check == sat :
         m = s.model()
+        tic    = time.time()
         result = [ m.evaluate(symbols[i]) for i in range(n) ]
+        toc    = time.time()
         sched  = [ (result[i], job_list[i]['name']) for i in range(n) ]
         sched  = sorted(sched, key=lambda x: int(str(x[0])) )
         for i in range(n) :
             print("# %2s : %20s" % (sched[i][0], sched[i][1]))
+
     else :
         print("UNSAT")
+
+    print("#" * 50 + "\n")
+    print(" Solving time    : %.8f " % (sat_toc - sat_tic) )
+    if tic is None or toc is None :
+        quit()
+    print(" Evaluation time : %.8f" % (toc - tic))
 
 def main() :
     args = parseArg()

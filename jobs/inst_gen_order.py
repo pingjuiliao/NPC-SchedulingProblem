@@ -39,7 +39,7 @@ for i in range(1, n_job+1):
 
     # pick dependencies
     dependency = []
-    if random.randint(0,1) == 1:
+    if random.randint(0,3) == 0:
         order_list = random.sample(range(1, n_job+1), this_order)
         for e in order_list:
             dependency.append("job"+str(e))
@@ -52,7 +52,7 @@ for i in range(1, n_job+1):
 
 json_obj = json.dumps(data, indent = 3)
 print("Total load %d" %(tot_load))
-pprint.pprint(data)
+# pprint.pprint(data)
 
 with open('case_order.json', 'w') as outfile:
     outfile.write(json_obj)

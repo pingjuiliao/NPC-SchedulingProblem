@@ -21,7 +21,7 @@ l_load = int(six.moves.input())
 tot_load = 0;
 
 for i in range(1, n_job+1):
-    load = random.randint(1, l_load+1)
+    load = random.randint(1, l_load)
     tot_load += load
     data['jobs']['job'+str(i)] = [load, []]
 

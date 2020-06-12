@@ -24,7 +24,6 @@ m_order = int(six.moves.input())
 if m_order >= n_job:
     m_order = n_job-1
 
-
 # Total load
 tot_load = 0;
 
